@@ -2,12 +2,24 @@ const express = require('express');
 const axios = require('axios')
 let trainsRouter = express.Router();
 
-trainsRouter.get('/:city', async (req, res) => {
-    const ROOT_URL1 = `https://data.opendatasoft.com/api/records/1.0/search/?dataset=tgvmax%40datasncf&start=0&rows=10000&facet=date&facet=destination&facet=origine&refine.origine=`
-    let { city } = req.params
+trainsRouter.get('/:city/:date', async (req, res) => {
+    var url;
+    const ROOT_URL = `https://data.opendatasoft.com/api/records/1.0/search/?dataset=tgvmax%40datasncf&start=0&rows=10000&facet=date&facet=destination&facet=origine`
+    var { city } = req.params
+    var { date } = req.params
     const tgvmaxdispo = "&exclude.od_happy_card=NON"
+    if (date === "null") {
+        url = `${ROOT_URL}&refine.origine=${city}${tgvmaxdispo}`
+    }
+    else {
+        let year = date.slice(0, 4)
+        let month = date.slice(5, 7)
+        let day = date.slice(8, 10)
+        date = `${year}%2F${month}%2F${day}`
+        url = `${ROOT_URL}&refine.date=${date}&refine.origine=${city}${tgvmaxdispo}`
+    }
     try {
-        let trains = await axios.get(`${ROOT_URL1}${city}${tgvmaxdispo}`)
+        let trains = await axios.get(url)
         trains = trains.data.records.sort((a, b) => {
             let departurea = a.fields.heure_depart;
             let departureb = b.fields.heure_depart;
@@ -19,6 +31,7 @@ trainsRouter.get('/:city', async (req, res) => {
             b = dateb.replace(/-/g, "").concat(departureb.replace(/:/g, ''));
             return a - b;
         });
+        console.log("The request is a success !")
         res.json(trains.slice(0, 200))
     }
     catch (err) {
