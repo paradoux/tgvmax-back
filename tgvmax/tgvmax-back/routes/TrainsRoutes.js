@@ -32,13 +32,11 @@ trainsRouter.get('/:city/:date', async (req, res) => {
             return a - b;
         });
         console.log("The request is a success !")
-        res.json(trains.slice(0, 200))
+        res.json(trains.slice(0, 2000))
     }
     catch (err) {
         console.error(err)
     }
 })
-
-
 
 module.exports.trainsRouter = trainsRouter;
