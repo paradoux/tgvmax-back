@@ -4,8 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "dev": "better-npm-run dev",
+    "start": "better-npm-run start",
+    "test": "better-npm-run test",
+    "lint": "eslint src --fix"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "nodemon ./index.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "NODE_HOST": "localhost",
+        "PORT": 3001
+      }
+    },
+    "start": {
+      "command": "node .index.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8081
+      }
+    }
   },
   "lint-staged": {
     "*.js": [
@@ -67,6 +88,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
+    "better-npm-run": "^0.1.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
