@@ -1,0 +1,87 @@
+{
+  "name": "tgvmax-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "plugins": [
+      "import",
+      "prettier"
+    ],
+    "globals": {
+      "__DEV__": true,
+      "__DIR__": true
+    },
+    "rules": {
+      "import/extensions": [
+        1,
+        "never",
+        {
+          "svg": "always"
+        }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "no-use-before-define": 0,
+      "no-console": 0,
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true
+        }
+      ]
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-eslint": "^10.0.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "express": "^4.16.3",
+    "forest-express-mongoose": "^2.16.1",
+    "moment": "^2.22.2",
+    "mongoose": "^5.4.15",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.16.2"
+  }
+}
